@@ -41,7 +41,7 @@ const validateToken = (req, res, next) => {
   });
 }
 
-const signup = (rep, res, next) => {
+const signup = (req, res, next) => {
   const name = req.body.name || '';
   const email = req.body.email || '';
   const password = req.body.password || '';

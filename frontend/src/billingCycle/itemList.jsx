@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Grid from '../common/layout/grid'
 import { Field, arrayInsert, arrayRemove } from 'redux-form'
+import { createNumberMask } from 'redux-form-input-masks'
 import Input from '../common/form/input'
 import If from '../common/operator/if'
 
@@ -22,12 +23,19 @@ class ItemList extends Component {
 
     renderRows() {
         const list = this.props.list || []
-        return list.map((item, index) => (
+
+        const currencyMask = createNumberMask({
+            prefix: 'R$ ',
+            decimalPlaces: 2,
+            locale: 'pt-BR',
+          })
+
+        return list.map((item, index) => (            
             <tr key={index}>
                 <td><Field name={`${this.props.field}[${index}].name`} component={Input}
                     placeholder='Informe o nome' readOnly={this.props.readOnly} /></td>
                 <td><Field name={`${this.props.field}[${index}].value`} component={Input}
-                    placeholder='Informe o valor' readOnly={this.props.readOnly}/></td>
+                    placeholder='Informe o valor' readOnly={this.props.readOnly} {...currencyMask}/></td>
                 <If test={this.props.showStatus}>
                     <td><Field name={`${this.props.field}[${index}].status`} component={Input}
                         placeholder='Informe o status' readOnly={this.props.readOnly}/></td>

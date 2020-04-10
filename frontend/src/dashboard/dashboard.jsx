@@ -16,14 +16,20 @@ class DashBoard extends Component {
 
     render() {
         const { credit, debt } = this.props.summary
+
+        function formatValue(value) {
+            const newValue = Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+            return newValue;
+        }
+
         return (
             <div>
                 <ContentHeader title='Dashboard' small='Versão 1.0' />
                 <Content>
                     <Row>
-                        <ValueBox cols='12 4' color='green' icon='bank' value={`R$ ${credit}`} text='Total de Créditos' />
-                        <ValueBox cols='12 4' color='red' icon='credit-card' value={`R$ ${debt}`} text='Total de Débitos' />
-                        <ValueBox cols='12 4' color='blue' icon='money' value={`R$ ${credit - debt}`} text='Valor Consolidado' />
+                        <ValueBox cols='12 4' color='green' icon='bank' value={formatValue(credit)} text='Total de Créditos' />
+                        <ValueBox cols='12 4' color='red' icon='credit-card' value={formatValue(debt)} text='Total de Débitos' />
+                        <ValueBox cols='12 4' color='blue' icon='money' value={formatValue(credit - debt)} text='Valor Consolidado' />
                     </Row>
                 </Content>
             </div>

@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactToastr from 'react-redux-toastr'
 import 'modules/react-redux-toastr/lib/css/react-redux-toastr.css'
 import ReduxToastr from 'react-redux-toastr'
 
